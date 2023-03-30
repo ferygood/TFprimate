@@ -1,20 +1,25 @@
 import urllib.request as urlreq
 from dash import Dash, html
 import dash_bio as dashbio
+import sys
 
 # create a alignment chart using dash
 # https://plotly.com/python/alignment-chart/
 
-app = Dash(__name__)
+def alnChart(alignment):
+  with open(alignment, "r") as f:
+    d = f.read()
 
-data = urlreq.urlopen('https://git.io/alignment_viewer_p53.fasta').read().decode('utf-8')
-
-app.layout = html.Div([
-  dashbio.AlignmentChart(
+  fig = dashbio.AlignmentChart(
     id='alignment-viewer',
-    data=data
-  )
-])
+    data=d
+    )
+  
+  return fig
 
-if __name__ == '__main__' :
-  app.run_server(debug=True)
+if __name__ == "__main__":
+  app = Dash(__name__)
+  alignment_input = input("Please enter a alignment file name(path): ")
+  aln_fig = alnChart(alignment_input)
+  app.layout = html.Div([aln_fig])
+  app.run_server()
