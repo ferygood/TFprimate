@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 
+# def get_entrezID(ensid):
 
 def ncbi_summary(geneid):
     
@@ -25,4 +26,3 @@ def ncbi_summary(geneid):
 if __name__== "__main__":
     geneid = "56979"
     print(ncbi_summary(geneid))
-
