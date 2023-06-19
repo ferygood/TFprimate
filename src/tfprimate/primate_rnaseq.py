@@ -10,7 +10,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def preprocess_data(fpkm_file):
-    data = pd.read_csv(fpkm_file, sep='\t', header=None, comment='#')
+    data = pd.read_csv(fpkm_file, sep='\t', header=None, comment='#', dtype=str)
     header = []
     with open(fpkm_file, 'r') as f:
         for line in f:
@@ -37,11 +37,17 @@ def preprocess_data(fpkm_file):
     
     return data, samples
 
-def get_gene_table(data, samples, gene):
-
-    selected_row = data.loc[data.gene_symbol == gene, samples]
-    new_data = {}
+def get_gene_table(data, samples, genesymbol=None, ensemblid=None):
     
+    if genesymbol:
+        selected_row = data.loc[data.gene_symbol == genesymbol, samples]
+    elif ensemblid:
+        selected_row = data.loc[data.ensembl_id == ensemblid, samples]
+    else:
+        print("get_gene_table: No gene selected. Use gene_symbol or ensemblid paramaters.")
+        return None
+
+    new_data = {}
     # Iterate over the column names and extract the tissue and species information
     for column in selected_row.columns:
         tissue, species = column.split('_')
@@ -53,10 +59,10 @@ def get_gene_table(data, samples, gene):
     return new_df
 
 def get_heatmap(table, gene, output=False):
-    plt.figure(figsize=(15,10))
+    plt.figure(figsize=(18,12))
     sns.heatmap(table, cmap='Blues', annot=True, fmt=".1f", cbar_kws={'label': 'sFPKM'})
     
-    plt.title(f'Gene {gene}\nTissue-Species Heatmap')
+    plt.title(f'Gene {gene}\nTissue-Species Heatmap', fontsize=16)
     # Rotate the x-axis labels for better readability
     plt.xticks(rotation=45)
     
@@ -68,9 +74,11 @@ def get_heatmap(table, gene, output=False):
 if __name__ == '__main__':
     
     # Main file will be "Tissue_export.RefSeq.GENE.u.sFPKM.txt"
-    fpkm_file = '../../data/nhprtr_refseq_sFPKM_test.csv'
-    gene = 'GAPDH'
+    #fpkm_file = '../../data/nhprtr_refseq_sFPKM_test.csv'
+    preprocessed_data = pd.read_csv('../../data/nhprtr_refseq_sfpkm_preproccesed.csv')
+    samples = preprocessed_data.columns[14:]
+    gene_ensembl_id = 'ENSG00000111640'
     
-    data, samples = preprocess_data(fpkm_file)
-    table = get_gene_table(data, samples, gene)
-    get_heatmap(table, gene, output= '../../tests/test_rnaseq.png')
+    #data, samples = preprocess_data(fpkm_file)
+    table = get_gene_table(preprocessed_data, samples, ensemblid=gene_ensembl_id)
+    get_heatmap(table, gene_ensembl_id, output= '../../tests/test_rnaseq.png')

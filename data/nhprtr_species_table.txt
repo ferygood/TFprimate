@@ -1,0 +1,17 @@
+SpeciesName	CommonName	3LetterCode	TAXID
+Aotus trivirgatus	Owl monkey	OWL	TaxID 9505
+Callithrix jacchus	Marmoset	MST	TaxID 9483
+Cercocebus atys	Sooty mangabey	SMY	TaxID 9531
+Gorilla gorilla	Gorilla	GOR	N/A
+Homo sapiens	Human	N/A	TaxID 9606
+Lemur catta	Ring-tail lemur	RTL	TaxID 9447
+Macaca fascicularis (Chinese or Indochinese)	Cynomolgus macaque Indochinese	CMC	TaxID 9541
+Macaca fascicularis (Mauritian)	Cynomolgus macaque Mauritian	CMM	N/A
+Macaca fuscata	Japanese macaque	JMI	TaxID 9542
+Macaca mulatta (Chinese)	Rhesus macaque Chinese	RMC	TaxID 9544
+Macaca mulatta (Indian)	Rhesus macaque Indian	RMI	TaxID 9544
+Macaca nemestrina	Pig-tailed macaque	PTM	TaxID 9545
+Microcebus murinus	Mouse lemur	MLM	TaxID 30608
+Pan troglodytes	Chimpanzee	CHP	TaxID 9598
+Papio anubis	Baboon	BAB	TaxID 9555
+Saimiri boliviensis	Squirrel monkey	SQM	TaxID 27679
