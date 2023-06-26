@@ -11,4 +11,4 @@ git clone git@github.com:ferygood/TFprimate.git
 pip install -r requirements.txt
 ```
 
-Test jenkins
+Jenkins server on Macaque: http://160.45.54.88:8080/
